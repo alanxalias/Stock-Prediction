@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        h2 {
+            margin-top: 40px;
+            color: #333;
+        }
+        .chart {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        // Add JavaScript code here to make the form interactive
+    </script>
+</head>
+<body>
+    <h1>Stock Dashboard</h1>
+    <form method="POST" action="{{ url_for('submit') }}">
+        <label for="ticker">Ticker:</label>
+        <input type="text" id="ticker" name="ticker" required>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required>
+        <label for="tabs">Select Tab:</label>
+        <select id="tabs" name="tabs">
+            <option value="Price Movements">Price Movements</option>
+            <option value="Future Price Predictions">Future Price Predictions</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    {% if plot_div %}
+        <h2>Price Chart</h2>
+        <div>{{ plot_div|safe }}</div>
+        {% if table %}
+            <h2>Price Movements</h2>
+            <div>{{ table|safe }}</div>
+        {% endif %}
+        {% if forecast %}
+            <h2>Predicted Prices for the Next 10 Days</h2>
+            <div>{{ forecast }}</div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
