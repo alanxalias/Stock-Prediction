@@ -4,4 +4,4 @@ numpy
 flask
 yfinance
 plotly
-unicorn
+gunicorn
